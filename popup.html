@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <header>
+            <h3>Widget Settings</h3>
+        </header>
+
+        <main>
+            <!-- Global Enabled -->
+            <div class="setting-row">
+                <span>Enable Widget Globally</span>
+                <label class="switch">
+                    <input type="checkbox" id="globalToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Theme Color Selector -->
+            <div class="setting-row">
+                <span>Accent Highlight Color</span>
+                <div class="color-picker-wrapper">
+                    <input type="color" id="themeColor" value="#00ff9d">
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Dynamic Site Block/Unblock -->
+            <div class="site-section">
+                <span class="site-label">Current Site:</span>
+                <span id="currentDomain" class="domain-text">Detecting...</span>
+                <button id="blockBtn" class="btn btn-block">Block On This Site</button>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Reset Button -->
+            <button id="resetBtn" class="btn btn-secondary">Reset Layout Positions</button>
+            
+            <div class="tip-section">
+                <span>💡 <strong>Alt + S</strong>: Toggle widget visibility.</span>
+                <span>💡 <strong>Hold Alt</strong>: Pass clicks through widget.</span>
+                <span>💡 <strong>Double-click</strong>: Collapse/expand.</span>
+            </div>
+        </main>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

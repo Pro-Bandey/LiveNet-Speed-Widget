@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "LiveNet Speed Widget",
+  "version": "2.0",
+  "description": "Premium real-time internet speed, ping, and page footprint widget with custom themes and hotkeys.",
+  "homepage_url": "https://Pro-Bandey.github.io/Projects/?Pro=LiveNet-Speed-Widget",
+
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },
+
+  "permissions": ["storage", "activeTab"],
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
