@@ -1,9 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "LiveNet Speed Widget",
-  "version": "2.0",
-  "description": "Premium real-time internet speed, ping, and page footprint widget with custom themes and hotkeys.",
-  "homepage_url": "https://Pro-Bandey.github.io/?id==LiveNet-Speed-Widget",
+  "name": "LivNet Speed Widget",
+  "version": "3.0",
+  "description": "Multi-Widget network monitoring extension with customizable templates, live latency tests, and diagnostic tools.",
 
   "icons": {
     "16": "icons/16.png",
@@ -23,6 +22,8 @@
   },
 
   "permissions": ["storage", "activeTab"],
+
+  "host_permissions": ["https://api.ipify.org/", "https://www.cloudflare.com/"],
 
   "content_scripts": [
     {

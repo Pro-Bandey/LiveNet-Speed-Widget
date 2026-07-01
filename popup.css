@@ -1,54 +1,138 @@
 :root {
-    --bg-dark: #0f0f0f;
-    --border-color: #333;
-    --text-color: #ffffff;
-    --text-muted: #888;
-    --accent: #0066ff;
-    --danger: #ffb833;
-    --btn-bg: #1a1a1a;
+    --BgColor: #0f0f0f;
+    --BorderColor: #333333;
+    --TextColor: #ffffff;
+    --TextMuted: #888888;
+    --AccentColor: #00ff9d;
+    --DangerColor: #ff3333;
+    --BtnBg: #1a1a1a;
 }
 
 body {
-    width: 290px;
+    width: 340px;
+    /* Comfortably displays advanced utility outputs and custom CSS editors */
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Roboto, sans-serif;
-    background-color: var(--bg-dark);
-    color: var(--text-color);
+    background-color: var(--BgColor);
+    color: var(--TextColor);
 }
 
-.popup-container {
+.PopupContainer {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tab Header Navigation System */
+.TabHeader {
+    display: flex;
+    background-color: #141414;
+    border-bottom: 1px solid var(--BorderColor);
+}
+
+.TabButton {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--TextMuted);
+    padding: 12px 0;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+    text-align: center;
+}
+
+.TabButton:hover {
+    color: var(--TextColor);
+    background-color: #1c1c1c;
+}
+
+.TabButton.ActiveTab {
+    color: var(--AccentColor);
+    border-bottom: 2px solid var(--AccentColor);
+    background-color: var(--BgColor);
+}
+
+/* Tab Content Pages */
+.TabContent {
+    display: none;
     padding: 16px;
     box-sizing: border-box;
+    max-height: 480px;
+    overflow-y: auto;
 }
 
-header h3 {
-    margin: 0 0 16px 0;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-align: center;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
+.TabContent.ActiveContent {
+    display: block;
 }
 
-.setting-row {
+/* Layout Elements */
+.SettingRow {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 13px;
+    margin-bottom: 14px;
 }
 
-/* Color Picker customization */
-.color-picker-wrapper {
-    width: 32px;
-    height: 32px;
+/* Switch Slider */
+.Switch {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+}
+
+.Switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.Slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #555555;
+    transition: .3s;
+    border-radius: 20px;
+}
+
+.Slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #ffffff;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+input:checked+.Slider {
+    background-color: var(--AccentColor);
+}
+
+input:checked+.Slider:before {
+    transform: translateX(16px);
+}
+
+/* Color Circle Picker */
+.ColorPickerWrapper {
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     overflow: hidden;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--BorderColor);
 }
 
-.color-picker-wrapper input[type="color"] {
+.ColorPickerWrapper input[type="color"] {
     border: none;
     width: 150%;
     height: 150%;
@@ -57,115 +141,216 @@ header h3 {
     background: none;
 }
 
-/* Switch styling */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 36px;
-    height: 20px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #555;
-    transition: .3s;
-    border-radius: 20px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 14px;
-    width: 14px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: .3s;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: var(--accent);
-}
-
-input:checked + .slider:before {
-    transform: translateX(16px);
-}
-
-.divider {
+.Divider {
     border: none;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--BorderColor);
     margin: 14px 0;
 }
 
-.site-section {
+/* Dropdown Select Menu */
+.SelectMenu {
+    background-color: var(--BtnBg);
+    color: var(--TextColor);
+    border: 1px solid var(--BorderColor);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    max-width: 150px;
+}
+
+/* Domain/Site Management UI */
+.SiteSection {
     display: flex;
     flex-direction: column;
     gap: 6px;
     font-size: 13px;
 }
 
-.site-label {
-    color: var(--text-muted);
+.SiteLabel {
+    color: var(--TextMuted);
     font-size: 11px;
     text-transform: uppercase;
     font-weight: 600;
 }
 
-.domain-text {
+.DomainText {
     font-weight: 700;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 4px;
 }
 
-.btn {
+/* Scrollable Blocklist Manager */
+.BlocklistContainer {
+    max-height: 100px;
+    overflow-y: auto;
+    border: 1px solid var(--BorderColor);
+    border-radius: 6px;
+    padding: 6px;
+    background-color: #121212;
+}
+
+.BlocklistItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    padding: 4px 6px;
+    border-bottom: 1px solid #1f1f1f;
+}
+
+.BlocklistItem:last-child {
+    border-bottom: none;
+}
+
+/* Custom CSS Code Editor Area */
+.CodeEditorContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.CustomLabel {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--TextMuted);
+    text-transform: uppercase;
+}
+
+.TextAreaField {
+    width: 100%;
+    height: 150px;
+    /* Extended height for direct CSS layouts override */
+    background-color: #121212;
+    color: #00ff9d;
+    /* Retro terminal style output */
+    border: 1px solid var(--BorderColor);
+    border-radius: 6px;
+    padding: 8px;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+    resize: vertical;
+}
+
+/* Action Button Suite */
+.Btn {
     padding: 8px 12px;
     font-size: 12px;
     font-weight: 600;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--BorderColor);
     border-radius: 6px;
-    background: var(--btn-bg);
-    color: var(--text-color);
+    background: var(--BtnBg);
+    color: var(--TextColor);
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
 }
 
-.btn:hover {
+.Btn:hover {
     background: #2a2a2a;
 }
 
-.btn-block {
-    border-color: var(--danger);
-    color: var(--danger);
+.BtnBlock {
+    border-color: var(--DangerColor);
+    color: var(--DangerColor);
 }
 
-.btn-block.active {
-    background-color: var(--danger);
-    color: var(--bg-dark);
+.BtnBlock.ActiveState {
+    background-color: var(--DangerColor);
+    color: var(--BgColor);
 }
 
-.btn-secondary {
+.BtnSecondary {
     width: 100%;
 }
 
-.tip-section {
+/* Diagnostics & Tools Panel Card */
+.ToolCard {
+    background-color: #141414;
+    border: 1px solid var(--BorderColor);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.ToolTitle {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ToolResult {
+    font-size: 12px;
+    color: var(--TextMuted);
+    margin-bottom: 10px;
+    font-family: monospace;
+}
+
+/* Real Speed Progress Display */
+.ProgressWrapper {
+    width: 100%;
+    background-color: #222222;
+    border-radius: 4px;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    display: none;
+}
+
+.ProgressBar {
+    width: 0%;
+    height: 100%;
+    background-color: var(--AccentColor);
+    transition: width 0.1s linear;
+}
+
+.DiagnosticList {
+    margin: 0;
+    padding: 0 0 0 16px;
+    font-size: 11px;
+    color: var(--TextMuted);
+}
+
+.DiagnosticItem {
+    margin-bottom: 4px;
+}
+
+.Spinner {
+    border: 2px solid #333333;
+    border-top: 2px solid var(--AccentColor);
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    animation: SpinAnimation 0.8s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes SpinAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.TipSection {
     display: flex;
     flex-direction: column;
     gap: 6px;
     font-size: 11px;
-    color: var(--text-muted);
+    color: var(--TextMuted);
     background-color: #141414;
-    border: 1px dashed var(--border-color);
+    border: 1px dashed var(--BorderColor);
     border-radius: 6px;
     padding: 10px;
     margin-top: 14px;

@@ -1,56 +1,155 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="popup.css">
 </head>
-<body>
-    <div class="popup-container">
-        <header>
-            <h3>Widget Settings</h3>
-        </header>
 
-        <main>
-            <!-- Global Enabled -->
-            <div class="setting-row">
+<body>
+    <div class="PopupContainer">
+        <!-- Tabbed Navigation Header -->
+        <div class="TabHeader">
+            <button class="TabButton ActiveTab" id="MainTabBtn">Main</button>
+            <button class="TabButton" id="SettingsTabBtn">Settings</button>
+            <button class="TabButton" id="ToolsTabBtn">Tools</button>
+        </div>
+
+        <!-- TAB 1: Main Control Overview -->
+        <div class="TabContent ActiveContent" id="MainTabContent">
+            <!-- Global Switch -->
+            <div class="SettingRow">
                 <span>Enable Widget Globally</span>
-                <label class="switch">
-                    <input type="checkbox" id="globalToggle" checked>
-                    <span class="slider"></span>
+                <label class="Switch">
+                    <input type="checkbox" id="GlobalToggle" checked>
+                    <span class="Slider"></span>
                 </label>
             </div>
 
-            <hr class="divider">
+            <hr class="Divider">
 
-            <!-- Theme Color Selector -->
-            <div class="setting-row">
+            <!-- Accent Color Selection -->
+            <div class="SettingRow">
                 <span>Accent Highlight Color</span>
-                <div class="color-picker-wrapper">
-                    <input type="color" id="themeColor" value="#00ff9d">
+                <div class="ColorPickerWrapper">
+                    <input type="color" id="ThemeColor" value="#00ff9d">
                 </div>
             </div>
 
-            <hr class="divider">
+            <hr class="Divider">
 
-            <!-- Dynamic Site Block/Unblock -->
-            <div class="site-section">
-                <span class="site-label">Current Site:</span>
-                <span id="currentDomain" class="domain-text">Detecting...</span>
-                <button id="blockBtn" class="btn btn-block">Block On This Site</button>
+            <!-- Page Context Configurations -->
+            <div class="SiteSection">
+                <span class="SiteLabel">Active Domain:</span>
+                <span id="CurrentDomain" class="DomainText">Detecting...</span>
+
+                <div class="SettingRow" style="margin: 8px 0 12px 0;">
+                    <span>Widget Layout Template</span>
+                    <select id="WidgetTemplateSelect" class="SelectMenu">
+                        <option value="Template1">1. Standard Bar</option>
+                        <option value="Template2">2. Minimalist Pill</option>
+                        <option value="Template3">3. Circular Gauge</option>
+                        <option value="Template4">4. Dev Console</option>
+                        <option value="Template5">5. Micro Indicator</option>
+                        <option value="Template6">6. Sparkline Graph</option>
+                        <option value="Custom">7. Custom CSS Template</option>
+                    </select>
+                </div>
+
+                <button id="BlockBtn" class="Btn BtnBlock">Block On This Site</button>
+            </div>
+        </div>
+
+        <!-- TAB 2: Advanced Settings & Custom CSS Editor -->
+        <div class="TabContent" id="SettingsTabContent">
+            <!-- Scrollable Blocked Domains Area -->
+            <div class="SiteSection" style="margin-bottom: 14px;">
+                <span class="SiteLabel">Blocked Domains:</span>
+                <div id="BlocklistContainer" class="BlocklistContainer">
+                    <!-- Dynamic block list appended here -->
+                </div>
             </div>
 
-            <hr class="divider">
+            <hr class="Divider">
 
-            <!-- Reset Button -->
-            <button id="resetBtn" class="btn btn-secondary">Reset Layout Positions</button>
-            
-            <div class="tip-section">
-                <span>💡 <strong>Alt + S</strong>: Toggle widget visibility.</span>
-                <span>💡 <strong>Hold Alt</strong>: Pass clicks through widget.</span>
-                <span>💡 <strong>Double-click</strong>: Collapse/expand.</span>
+            <!-- Custom CSS Styling overrides (No HTML Input block) -->
+            <div class="CodeEditorContainer">
+                <span class="CustomLabel">Custom CSS Overrides</span>
+                <textarea id="CustomCssInput" class="TextAreaField"
+                    placeholder="/* Use PascalCase selectors */&#10;#InternetSpeed {&#10;    border-color: #00ff9d;&#10;}&#10;.DlBox .ValText {&#10;    color: #00b8ff;&#10;}"></textarea>
             </div>
-        </main>
+
+            <button id="SaveCustomWidgetBtn" class="Btn" style="width: 100%; margin-bottom: 14px;">Save Custom CSS
+                Layout</button>
+
+            <hr class="Divider">
+
+            <!-- Structural Position Reset Option -->
+            <button id="ResetBtn" class="Btn BtnSecondary">Reset Layout Coordinates</button>
+        </div>
+
+        <!-- TAB 3: Advanced Diagnostic Tools Panel -->
+        <div class="TabContent" id="ToolsTabContent">
+            <!-- Tool 1: Accurate Speed Test -->
+            <div class="ToolCard">
+                <div class="ToolTitle">
+                    <span>Throughput Test</span>
+                    <button id="RunSpeedTestBtn" class="Btn">Start Test</button>
+                </div>
+                <div class="ProgressWrapper" id="SpeedProgressWrapper">
+                    <div class="ProgressBar" id="SpeedProgressBar"></div>
+                </div>
+                <div id="SpeedTestResult" class="ToolResult">Click start to measure raw HTTP download throughput.</div>
+            </div>
+
+            <!-- Tool 2: Ping & Jitter Analyzer -->
+            <div class="ToolCard">
+                <div class="ToolTitle">
+                    <span>Ping Analyzer</span>
+                    <button id="RunPingTestBtn" class="Btn">Test Latency</button>
+                </div>
+                <div id="PingTestResult" class="ToolResult">Measures standard deviations and route drift.</div>
+            </div>
+
+            <!-- Tool 3: Public IP Lookup -->
+            <div class="ToolCard">
+                <div class="ToolTitle">
+                    <span>Public IP Resolver</span>
+                    <button id="RunIpLookupBtn" class="Btn">Query IP</button>
+                </div>
+                <div id="IpLookupResult" class="ToolResult">Resolves external routing network properties.</div>
+            </div>
+
+            <!-- Tool 4: CDN Node Locator -->
+            <div class="ToolCard">
+                <div class="ToolTitle">
+                    <span>CDN Edge Node</span>
+                    <button id="RunCdnNodeBtn" class="Btn">Locate Node</button>
+                </div>
+                <div id="CdnNodeResult" class="ToolResult">Identifies nearest edge exit location.</div>
+            </div>
+
+            <!-- Tool 5: WebSocket Protocol Audit -->
+            <div class="ToolCard">
+                <div class="ToolTitle">
+                    <span>WebSocket Protocol Check</span>
+                    <button id="RunWebSocketBtn" class="Btn">Verify WS</button>
+                </div>
+                <div id="WebSocketResult" class="ToolResult">Audits network support for socket sync.</div>
+            </div>
+
+            <!-- Tool 6: Network Health Diagnostic logs -->
+            <div class="ToolCard">
+                <div class="ToolTitle">Network Diagnostics Log</div>
+                <ul class="DiagnosticList" id="DiagnosticLogList">
+                    <li class="DiagnosticItem" id="DiagOnline">Checking Browser Interface...</li>
+                    <li class="DiagnosticItem" id="DiagApi">Checking Connection API...</li>
+                    <li class="DiagnosticItem" id="DiagLatency">Checking Edge Latency...</li>
+                </ul>
+            </div>
+        </div>
     </div>
     <script src="popup.js"></script>
 </body>
+
 </html>
